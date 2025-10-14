@@ -7,6 +7,7 @@ All configurations in [scripts/train.sh](scripts/train.sh) will be passed into
      
 ### Model
   - **model_variant**: the llama variant, values in "7b", "13b", "34b" and "70b".
+  - **gated_attn**: whether to use gated attention as implemented here: https://arxiv.org/pdf/2505.06708
   - **ckpt_load_path**: the path from where checkpoint will be loaded for continued training.
   - **ckpt_save_path**: the path to which checkpoint will be saved.
     
