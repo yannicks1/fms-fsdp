@@ -22,7 +22,7 @@ def update_config(config, **kwargs):
                 print(f"Warning: unknown parameter {k}")
 
 
-def get_model_config(model_variant):
+def get_model_config(model_variant, gated_attn=False):
     if model_variant == "llama2_70b":
         model_config = LLaMAConfig(
             emb_dim=8192,
@@ -31,6 +31,7 @@ def get_model_config(model_variant):
             kvheads=8,
             nlayers=80,
             hidden_grow_factor=28672 / 8192,
+            gated_attn=gated_attn,
         )
     elif model_variant == "llama2_34b":
         model_config = LLaMAConfig(
@@ -41,6 +42,7 @@ def get_model_config(model_variant):
             hidden_grow_factor=22016 / 8192,
             max_expected_seq_len=16384,
             rope_theta=1000000.0,
+            gated_attn=gated_attn,
         )
     elif model_variant == "llama2_13b":
         model_config = LLaMAConfig(
@@ -48,11 +50,13 @@ def get_model_config(model_variant):
             nheads=40,
             nlayers=40,
             hidden_grow_factor=13824 / 5120,
+            gated_attn=gated_attn,
         )
     elif model_variant == "llama2_7b":
         model_config = LLaMAConfig(
             hidden_grow_factor=11008 / 4096,
             kvheads=32,
+            gated_attn=gated_attn,
         )
     elif model_variant == "llama2_1.4b":
         model_config = LLaMAConfig(
@@ -61,6 +65,7 @@ def get_model_config(model_variant):
             nlayers=24,
             hidden_grow_factor=3,
             kvheads=4,
+            gated_attn=gated_attn,
         )
     elif model_variant == "llama3_8b":
         model_config = LLaMAConfig(
@@ -72,6 +77,7 @@ def get_model_config(model_variant):
             hidden_grow_factor=3.5,
             max_expected_seq_len=8192,
             rope_theta=500000.0,
+            gated_attn=gated_attn,
         )
     elif model_variant == "llama3_8b_4k":
         model_config = LLaMAConfig(
@@ -83,6 +89,7 @@ def get_model_config(model_variant):
             hidden_grow_factor=3.5,
             max_expected_seq_len=4096,
             rope_theta=500000.0,
+            gated_attn=gated_attn,
         )
     elif model_variant == "llama3_1.8b":
         model_config = LLaMAConfig(
@@ -94,6 +101,7 @@ def get_model_config(model_variant):
             hidden_grow_factor=3.5,
             max_expected_seq_len=8192,
             rope_theta=500000.0,
+            gated_attn=gated_attn,
         )
     elif model_variant == "llama3_1.8b_4k":
         model_config = LLaMAConfig(
@@ -105,6 +113,7 @@ def get_model_config(model_variant):
             hidden_grow_factor=3.5,
             max_expected_seq_len=4096,
             rope_theta=500000.0,
+            gated_attn=gated_attn,
         )
     elif model_variant == "llama3_3.2b":
         model_config = LLaMAConfig(
@@ -116,6 +125,7 @@ def get_model_config(model_variant):
             hidden_grow_factor=8 / 3,
             max_expected_seq_len=8192,
             rope_theta=500000.0,
+            gated_attn=gated_attn,
         )
     elif model_variant == "llama3_3.2b_4k":
         model_config = LLaMAConfig(
@@ -126,6 +136,7 @@ def get_model_config(model_variant):
             nlayers=24,
             hidden_grow_factor=8 / 3,
             max_expected_seq_len=4096,
+            gated_attn=gated_attn,
         )
     elif model_variant == "llama3_70b":
         model_config = LLaMAConfig(
@@ -137,6 +148,7 @@ def get_model_config(model_variant):
             hidden_grow_factor=3.5,
             max_expected_seq_len=8192,
             rope_theta=500000.0,
+            gated_attn=gated_attn,
         )
     elif model_variant == "llama3_70b_4k":
         model_config = LLaMAConfig(
@@ -148,6 +160,7 @@ def get_model_config(model_variant):
             hidden_grow_factor=3.5,
             max_expected_seq_len=4096,
             rope_theta=500000.0,
+            gated_attn=gated_attn,
         )
     elif model_variant == "llama3_194m_4k":
         model_config = LLaMAConfig(
@@ -157,6 +170,7 @@ def get_model_config(model_variant):
             nlayers=10,
             max_expected_seq_len=4096,
             rope_theta=500000.0,
+            gated_attn=gated_attn,
         )
     elif model_variant == "mamba_9.8b":
         model_config = {
@@ -298,6 +312,7 @@ def get_model_config(model_variant):
             hidden_grow_factor=3.2,
             max_expected_seq_len=4096,
             rope_theta=500000.0,
+            gated_attn=gated_attn,
         )
     elif model_variant == "llama_1b_halfrope":
         model_config = LLaMAConfig(
@@ -310,6 +325,7 @@ def get_model_config(model_variant):
             max_expected_seq_len=4096,
             rope_theta=500000.0,
             rope_partial=.5,
+            gated_attn=gated_attn,
         )
     elif model_variant == "llama_1b_rope652":
         model_config = LLaMAConfig(
@@ -321,6 +337,7 @@ def get_model_config(model_variant):
             hidden_grow_factor=3.2,
             max_expected_seq_len=4096,
             rope_theta=652.0,
+            gated_attn=gated_attn,
         )
     elif model_variant == "llama_1b_unrope6":
         model_config = LLaMAConfig(
@@ -334,6 +351,7 @@ def get_model_config(model_variant):
             rope_theta=6.283,
             rope_scaling={"rope_type":"unrope"},
             rope_partial=.5,
+            gated_attn=gated_attn,
         )
     elif model_variant == "llama_1b_unrope32":
         model_config = LLaMAConfig(
@@ -347,6 +365,7 @@ def get_model_config(model_variant):
             rope_theta=32,
             rope_scaling={"rope_type":"unrope"},
             rope_partial=.5,
+            gated_attn=gated_attn,
         )
     elif model_variant == "llama_1b_unrope32_triton":
         model_config = LLaMAConfig(
@@ -360,6 +379,7 @@ def get_model_config(model_variant):
             rope_theta=32,
             rope_scaling={"rope_type":"unrope"},
             rope_partial=.5,
+            gated_attn=gated_attn,
         )
     elif model_variant == "llama_3b":
         model_config = LLaMAConfig(
@@ -371,6 +391,7 @@ def get_model_config(model_variant):
             hidden_grow_factor=3.5,
             max_expected_seq_len=4096,
             rope_theta=500000.0,
+            gated_attn=gated_attn,
         )
     elif model_variant == "llama_3b_halfrope":
         model_config = LLaMAConfig(
@@ -383,6 +404,7 @@ def get_model_config(model_variant):
             max_expected_seq_len=4096,
             rope_theta=500000.0,
             rope_partial=.5,
+            gated_attn=gated_attn,
         )
     elif model_variant == "llama_3b_rope652":
         model_config = LLaMAConfig(
@@ -394,6 +416,7 @@ def get_model_config(model_variant):
             hidden_grow_factor=3.5,
             max_expected_seq_len=4096,
             rope_theta=652.0,
+            gated_attn=gated_attn,
         )
     elif model_variant == "llama_3b_unrope6":
         model_config = LLaMAConfig(
@@ -407,6 +430,7 @@ def get_model_config(model_variant):
             rope_theta=6.283,
             rope_scaling={"rope_type":"unrope"},
             rope_partial=.5,
+            gated_attn=gated_attn,
         )
     elif model_variant == "llama_3b_unrope32":
         model_config = LLaMAConfig(
@@ -420,6 +444,7 @@ def get_model_config(model_variant):
             rope_theta=32,
             rope_scaling={"rope_type":"unrope"},
             rope_partial=.5,
+            gated_attn=gated_attn,
         )
     elif model_variant == "mamba_9.8b_32k":
         model_config = {

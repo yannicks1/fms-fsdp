@@ -6,6 +6,7 @@ from typing import Optional, Union
 class train_config:
     # model
     model_variant: str = "7b"
+    gated_attn: bool = False
     ckpt_load_path: str = "/fsx/output/ckpt"
     ckpt_save_path: str = "/fsx/output/ckpt"
 
